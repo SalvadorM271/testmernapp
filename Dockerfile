@@ -12,8 +12,9 @@ RUN npm run build
 # release application
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
-RUN ls
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.conf /etc/nginx/conf.d
 #COPY $enviroment_conf /etc/nginx/$enviroment_conf
-COPY production.conf /etc/nginx/sites-enabled/production.conf
+#COPY production.conf /etc/nginx/sites-enabled/production.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

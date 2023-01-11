@@ -23,7 +23,7 @@ export default class CreateExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/users/`)
+    axios.get(`http://a634015e84064496b80816a93bce39db-269371323.us-east-1.elb.amazonaws.com/users/`)
       .then(response => {
         console.log(JSON.stringify(process.env, null, 2)) // remove
         if (response.data.length > 0) {
@@ -75,7 +75,7 @@ export default class CreateExercise extends Component {
 
     console.log(exercise);
 
-    axios.post(`http://localhost:5000/exercises/add`, exercise)
+    axios.post(`http://a634015e84064496b80816a93bce39db-269371323.us-east-1.elb.amazonaws.com/exercises/add`, exercise)
       .then(res => console.log(res.data));
 
     window.location = '/';
