@@ -23,7 +23,7 @@ export default class EditExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://a634015e84064496b80816a93bce39db-269371323.us-east-1.elb.amazonaws.com/exercises/`+this.props.match.params.id)
+    axios.get(`http://dev.salvadormenendez.social/exercises/`+this.props.match.params.id)
       .then(response => {
         this.setState({
           username: response.data.username,
@@ -36,7 +36,7 @@ export default class EditExercise extends Component {
         console.log(error);
       })
 
-    axios.get(`http://a634015e84064496b80816a93bce39db-269371323.us-east-1.elb.amazonaws.com/users/`)
+    axios.get(`http://dev.salvadormenendez.social/users/`)
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -86,7 +86,7 @@ export default class EditExercise extends Component {
 
     console.log(exercise);
 
-    axios.post(`http://a634015e84064496b80816a93bce39db-269371323.us-east-1.elb.amazonaws.com/exercises/update/` + this.props.match.params.id, exercise)
+    axios.post(`http://dev.salvadormenendez.social/exercises/update/` + this.props.match.params.id, exercise)
       .then(res => console.log(res.data));
 
     window.location = '/';

@@ -28,7 +28,7 @@ export default class CreateUser extends Component {
 
     console.log(user);
 
-    axios.post(`http://a634015e84064496b80816a93bce39db-269371323.us-east-1.elb.amazonaws.com/users/add`, user)
+    axios.post(`http://dev.salvadormenendez.social/users/add`, user)
       .then(res => console.log(res.data));
 
     this.setState({
