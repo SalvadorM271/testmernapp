@@ -11,7 +11,7 @@ phases:
         - TAG="$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
         # Update Image tag in our Kubernetes Deployment Manifest (here is where i need to clone the infra repo)
         # in a prod app the repo is gonna be private so i will need to authenticate first
-        - git clone https://github.com/SalvadorM271/eks_terraform
+        - git clone -b feature/new_feature https://github.com/SalvadorM271/eks_terraform
         - cd eks_terraform/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
         - echo "Update Image tag in kube-manifest..."
         - sed -i "s|153042419275.dkr.ecr.us-east-2.amazonaws.com/eks_mern_frontend:[0-9\.]*|153042419275.dkr.ecr.us-east-2.amazonaws.com/frontend:${TAG}|" frontend_deployment.yml
