@@ -18,7 +18,7 @@ phases:
         - sed -i "s|153042419275.dkr.ecr.us-east-2.amazonaws.com/eks_mern_frontend:[0-9\.]*|153042419275.dkr.ecr.us-east-2.amazonaws.com/frontend:${TAG}|" ./frontend_deployment.yml
         - cat frontend_deployment.yml
         - echo "pushing changes to infra repo..."
-        # add this to the codebuild envs
+        # values are in codebuild ENVs
         - git config --global user.email ${GIT_USER_EMAIL}
         - git config --global user.name ${GIT_USER_NAME}
         - git add frontend_deployment.yml
