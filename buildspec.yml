@@ -21,6 +21,7 @@ phases:
         # values are in codebuild ENVs
         - git config --global user.email ${GIT_USER_EMAIL}
         - git config --global user.name ${GIT_USER_NAME}
+        - git config --global credential.helper '!aws codebuild-execute-helper get-login-password | git credential-approve'
         - git add frontend_deployment.yml
         - git commit -m "Update frontend image tag to ${TAG}"
         - git push
