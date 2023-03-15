@@ -15,7 +15,7 @@ phases:
         - cd eks_terraform/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
         - echo "Update Image tag in kube-manifest..."
         - ls
-        - sed -i 's@eks_mern_frontend:1\.0@'"$TAG"'@' frontend_deployment.yml
+        - sed -i 's@eks_mern_frontend:1\.0@'"153042419275.dkr.ecr.us-east-1.amazonaws.com/eks_mern_frontend:$TAG"'@' frontend_deployment.yml
         - cat frontend_deployment.yml
         - echo "pushing changes to infra repo..."
         # values are in codebuild ENVs
