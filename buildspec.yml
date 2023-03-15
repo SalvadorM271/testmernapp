@@ -21,14 +21,20 @@ phases:
       # Build Docker Image
       - echo "Build started on `date`"
       - echo "Building the Docker image..."
+      - ls
       - docker build --tag $FRONTEND:$TAG .
+      - cd backend
+      - ls 
+      - docker build --tag $BACKEND:$TAG .
   post_build:
     commands:
       # Push Docker Image to ECR Repository
       - echo "Build completed on `date`"
       - echo "Pushing the Docker image to ECR Repository"
       - docker push $FRONTEND:$TAG
+      - docker push $BACKEND:$TAG
       - echo "Docker Image Push to ECR Completed -  $FRONTEND:$TAG"
+      - echo "Docker Image Push to ECR Completed -  $BACKEND:$TAG"
       - git clone -b feature/new_feature https://github.com/SalvadorM271/eks_terraform
       - cd eks_terraform/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
       - echo "Update Image tag in kube-manifest..."
