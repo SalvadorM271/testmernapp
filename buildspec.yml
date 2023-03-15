@@ -18,6 +18,9 @@ phases:
         - sed -i 's@\(eks_mern_frontend:\).*@\1'"$TAG"'@' frontend_deployment.yml
         - cat frontend_deployment.yml
         - echo "pushing changes to infra repo..."
+        # Verify AWS CLI Version        
+        - echo "Verify AWS CLI Version..."
+        - aws --version
         # values are in codebuild ENVs
         - git config --global user.email ${GIT_USER_EMAIL}
         - git config --global user.name ${GIT_USER_NAME}
@@ -26,9 +29,6 @@ phases:
         - git commit -m "Update frontend image tag to ${TAG}"
         - git push
         - echo "push to infra repo finish"
-        # Verify AWS CLI Version        
-        - echo "Verify AWS CLI Version..."
-        - aws --version
         # Login to ECR Registry for docker to push the image to ECR Repository
         - echo "Login in to Amazon ECR..."
         - $(aws ecr get-login --no-include-email)
