@@ -14,7 +14,9 @@ phases:
         - git clone -b feature/new_feature https://github.com/SalvadorM271/eks_terraform
         - cd eks_terraform/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
         - echo "Update Image tag in kube-manifest..."
+        - ls
         - sed -i "s|153042419275.dkr.ecr.us-east-2.amazonaws.com/eks_mern_frontend:[0-9\.]*|153042419275.dkr.ecr.us-east-2.amazonaws.com/frontend:${TAG}|" frontend_deployment.yml
+        - cat frontend_deployment.yml
         - echo "pushing changes to infra repo..."
         # add this to the codebuild envs
         - git config --global user.email ${GIT_USER_EMAIL}
