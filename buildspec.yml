@@ -72,7 +72,3 @@ phases:
       # #- echo "AWS_SESSION_TOKEN...  ${AWS_SESSION_TOKEN}"            
       # #- echo "AWS_EXPIRATION...  $AWS_EXPIRATION"             
       # #- echo "EKS_CLUSTER_NAME...  $EKS_CLUSTER_NAME"             
-artifacts:
-  files: 
-    - build.json   
-    - kube-manifests/*
