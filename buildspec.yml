@@ -23,6 +23,7 @@ phases:
       - echo "Building the Docker image..."
       - ls
       - docker build --tag $FRONTEND:$TAG .
+      - echo "build of frontend finish, now for the backend"
       - cd backend
       - ls 
       - docker build --tag $BACKEND:$TAG .
