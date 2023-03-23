@@ -1,4 +1,4 @@
-# this file is for aws codebuild
+# this file is for aws codebuild, but is no longer needed on this repo
 
 version: 0.2
 phases:
