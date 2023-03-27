@@ -23,12 +23,12 @@ phases:
       - echo "Building the Docker image..."
       - ls
       - docker build --tag $FRONTEND:$TAG .
-      - echo "Creating pull request from feature/new_feature to develop"
+      - echo "Creating pull request from develop to main"
       - |
         curl -X POST \
           -H "Authorization: token $GITHUB_TOKEN" \
           -H "Accept: application/vnd.github+json" \
-          -d '{"title": "Automated PR from feature/new_feature to develop", "head": "feature/new_feature", "base": "develop"}' \
+          -d '{"title": "Automated PR from develop to main", "head": "develop", "base": "main"}' \
           https://api.github.com/repos/$GIT_USER_NAME/$REPO_NAME/pulls
   post_build:
     commands:
@@ -37,7 +37,7 @@ phases:
       - echo "Pushing the Docker image to ECR Repository"
       - docker push $FRONTEND:$TAG
       - echo "Docker Image Push to ECR Completed -  $FRONTEND:$TAG"
-      - git clone -b feature/new_feature https://github.com/SalvadorM271/eks_terraform
+      - git clone -b develop https://github.com/SalvadorM271/eks_terraform
       - cd eks_terraform/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
       - echo "Update Image tag in kube-manifest..."
       - ls
@@ -56,26 +56,4 @@ phases:
       - git commit -m "Update frontend image tag to ${TAG}"
       - git push
       - echo "push to infra repo finish"    
-      # # Extracting AWS Credential Information using STS Assume Role for kubectl
-      # - echo "Setting Environment Variables related to AWS CLI for Kube Config Setup"          
-      # - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
-      # - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
-      # - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
-      # - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
-      # - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
-      # # Setup kubectl with our EKS Cluster              
-      # - echo "Update Kube Config"      
-      # - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
-      # # Apply changes to our Application using kubectl
-      # - echo "Apply changes to kube manifests"            
-      # - kubectl apply -f kube-manifests/
-      # - echo "Completed applying changes to Kubernetes Objects"           
-      # # Create Artifacts which we can use if we want to continue our pipeline for other stages
-      # - printf '[{"name":"01-DEVOPS-Nginx-Deployment.yml","imageUri":"%s"}]' $FRONTEND:$TAG > build.json
-      # # Additional Commands to view your credentials      
-      # #- echo "Credentials Value is..  ${CREDENTIALS}"      
-      # #- echo "AWS_ACCESS_KEY_ID...  ${AWS_ACCESS_KEY_ID}"            
-      # #- echo "AWS_SECRET_ACCESS_KEY...  ${AWS_SECRET_ACCESS_KEY}"            
-      # #- echo "AWS_SESSION_TOKEN...  ${AWS_SESSION_TOKEN}"            
-      # #- echo "AWS_EXPIRATION...  $AWS_EXPIRATION"             
-      # #- echo "EKS_CLUSTER_NAME...  $EKS_CLUSTER_NAME"             
+      
