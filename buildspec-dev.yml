@@ -42,7 +42,7 @@ phases:
       - echo "Update Image tag in kube-manifest..."
       - ls
       - sed -i 's@\(eks_mern_frontend:\).*@\1'"$TAG"'@' frontend_deployment_develop.yml
-      - cat frontend_deployment.yml
+      - cat frontend_deployment_develop.yml
       - echo "pushing changes to infra repo..."
       # Verify AWS CLI Version        
       - echo "Verify AWS CLI Version..."
@@ -52,7 +52,7 @@ phases:
       - git config --global user.name ${GIT_USER_NAME}
       # apparenlly codepipeline does not give push permissions to codebuild so token was needed
       - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/eks_terraform.git
-      - git add frontend_deployment.yml
+      - git add frontend_deployment_develop.yml
       - git commit -m "Update frontend image tag to ${TAG}"
       - git push
       - echo "push to infra repo finish"    
