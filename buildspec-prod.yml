@@ -1,4 +1,4 @@
-# this file is for aws codebuild, maybe is better like this.
+# this file is for aws codebuild.
 
 version: 0.2
 phases:
@@ -16,6 +16,9 @@ phases:
         - $(aws ecr get-login --no-include-email)
         # Update Kube config Home Directory
         - export KUBECONFIG=$HOME/.kube/config
+        # since this a share env using no login gives the tick rate problem
+        - echo "Log in to Docker Hub..."
+        - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
   build:
     commands:
       # Build Docker Image
