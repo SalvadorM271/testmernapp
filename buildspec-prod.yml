@@ -33,12 +33,12 @@ phases:
       - echo "Pushing the Docker image to ECR Repository"
       - docker push $FRONTEND:$TAG
       - echo "Docker Image Push to ECR Completed -  $FRONTEND:$TAG"
-      - git clone -b main https://github.com/SalvadorM271/eks_terraform
-      - cd eks_terraform/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
+      - git clone https://github.com/SalvadorM271/eks_terraform
+      - cd eks_terraform/01_enviroments/prod/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
       - echo "Update Image tag in kube-manifest..."
       - ls
-      - sed -i 's@\(eks_mern_frontend:\).*@\1'"$TAG"'@' frontend_deployment_main.yml
-      - cat frontend_deployment_main.yml
+      - sed -i 's@\(eks_mern_frontend:\).*@\1'"$TAG"'@' frontend_deployment.yml
+      - cat frontend_deployment.yml
       - echo "pushing changes to infra repo..."
       # Verify AWS CLI Version        
       - echo "Verify AWS CLI Version..."
@@ -48,7 +48,7 @@ phases:
       - git config --global user.name ${GIT_USER_NAME}
       # apparenlly codepipeline does not give push permissions to codebuild so token was needed
       - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/eks_terraform.git
-      - git add frontend_deployment_main.yml
+      - git add frontend_deployment.yml
       - git commit -m "Update frontend image tag to ${TAG}"
       - git push
       - echo "push to infra repo finish"    

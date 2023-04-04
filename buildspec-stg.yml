@@ -26,12 +26,12 @@ phases:
       - echo "Building the Docker image..."
       - ls
       - docker build --tag $FRONTEND:$TAG .
-      - echo "Creating pull request from develop to staging"
+      - echo "Creating pull request from staging to main"
       - |
         curl -X POST \
           -H "Authorization: token $GITHUB_TOKEN" \
           -H "Accept: application/vnd.github+json" \
-          -d '{"title": "Automated PR from develop to staging", "head": "develop", "base": "staging"}' \
+          -d '{"title": "Automated PR from staging to main", "head": "staging", "base": "main"}' \
           https://api.github.com/repos/$GIT_USER_NAME/$REPO_NAME/pulls
   post_build:
     commands:
@@ -41,7 +41,7 @@ phases:
       - docker push $FRONTEND:$TAG
       - echo "Docker Image Push to ECR Completed -  $FRONTEND:$TAG"
       - git clone https://github.com/SalvadorM271/eks_terraform
-      - cd eks_terraform/01_enviroments/dev/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
+      - cd eks_terraform/01_enviroments/stg/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
       - echo "Update Image tag in kube-manifest..."
       - ls
       - sed -i 's@\(eks_mern_frontend:\).*@\1'"$TAG"'@' frontend_deployment.yml
