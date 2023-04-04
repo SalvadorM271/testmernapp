@@ -40,7 +40,7 @@ phases:
       - echo "Pushing the Docker image to ECR Repository"
       - docker push $FRONTEND:$TAG
       - echo "Docker Image Push to ECR Completed -  $FRONTEND:$TAG"
-      - git clone -b https://github.com/SalvadorM271/eks_terraform
+      - git clone https://github.com/SalvadorM271/eks_terraform
       - cd eks_terraform/01_enviroments/stg/k8s_mern_alb_extDNS_autoscaler_aws_secrets        
       - echo "Update Image tag in kube-manifest..."
       - ls
