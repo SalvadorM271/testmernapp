@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'alpine:3.17.3'
+      image 'crimson2022/test:2'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
