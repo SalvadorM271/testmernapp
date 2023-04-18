@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Install dependencies') {
       steps {
-        sh 'apk add --no-cache docker'
+        //sh 'apk add --no-cache docker'
         sh 'apk add --no-cache aws-cli'
         sh 'aws --version'
       }
