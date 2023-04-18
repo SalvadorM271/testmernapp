@@ -1,8 +1,14 @@
 pipeline {
   agent {
-    docker {
-      image 'crimson2022/test:2'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+    kubernetes {
+      label 'mypod'
+      containerTemplate {
+        name 'jnlp'
+        image 'crimson2022/test:2'
+        command ''
+        args '${computer.jnlpmac} ${computer.name}'
+        ttyEnabled true
+      }
     }
   }
   stages {
