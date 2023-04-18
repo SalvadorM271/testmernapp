@@ -26,7 +26,7 @@ pipeline {
       steps {
         // using script so this value can be use in other stages
         script {
-            TAG="$(date +%Y-%m-%d.%H.%M.%S)-${BUILD_ID}"
+            TAG="${date +%Y-%m-%d.%H.%M.%S}-${BUILD_ID}"
             // Log in to ECR and authenticate Docker client
             def ecrCredentials = credentials('aws-creds')
             def ecrLogin = sh(script: "aws ecr get-login --no-include-email --region ${AWS_REGION} --registry-ids ${ECR_REGISTRY_ID}", returnStdout: true).trim()
