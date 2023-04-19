@@ -4,7 +4,7 @@ pipeline {
       label 'mypod'
       containerTemplate {
         name 'jnlp'
-        image 'crimson2022/test:3'
+        image 'crimson2022/test:4'
         command ''
         args '${computer.jnlpmac} ${computer.name}'
         ttyEnabled true
