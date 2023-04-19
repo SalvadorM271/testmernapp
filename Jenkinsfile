@@ -47,15 +47,15 @@ pipeline {
       }
       steps {
         script {
-            sh '''
-              echo "Build started on `date`"
-              Building the Docker image...
+            sh """
+              echo \"Build started on `date`\"
+              echo Building the Docker image...
               docker build --tag $FRONTEND:$TAG .
-              echo "Build completed on `date`"
-              echo "Pushing the Docker image to ECR Repository"
+              echo \"Build completed on `date`\"
+              echo Pushing the Docker image to ECR Repository
               docker push $FRONTEND:$TAG
-              echo "Docker Image Push to ECR Completed -  $FRONTEND:$TAG"
-            '''
+              echo \"Docker Image Push to ECR Completed -  $FRONTEND:$TAG\"
+            """
         }
       }
     }
