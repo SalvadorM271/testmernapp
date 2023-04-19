@@ -4,7 +4,7 @@ pipeline {
       label 'mypod'
       containerTemplate {
         name 'jnlp'
-        image 'crimson2022/test:4'
+        image 'crimson2022/test:3'
         command ''
         args '${computer.jnlpmac} ${computer.name}'
         ttyEnabled true
@@ -42,7 +42,7 @@ pipeline {
     }
     stage('Check Docker status') {
       steps {
-        sh 'sudo systemctl status docker || sudo service docker status'
+        sh 'sudo systemctl status docker || sudo service docker status || sudo systemctl start docker || sudo service docker start'
       }
     }
     stage('Build and push') {
