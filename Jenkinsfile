@@ -2,13 +2,24 @@ pipeline {
   agent {
     kubernetes {
       label 'mypod'
-      containerTemplate {
-        name 'jnlp'
-        image 'crimson2022/test:6'
-        command ''
-        args '${computer.jnlpmac} ${computer.name}'
-        ttyEnabled true
-      }
+      yaml """
+      apiVersion: v1
+      kind: Pod
+      spec:
+        containers:
+        - name: jnlp
+          image: crimson2022/test:7
+          command:
+          - cat
+          tty: true
+          volumeMounts:
+            - name: docker-socket
+              mountPath: /var/run/docker.sock
+        volumes:
+          - name: docker-socket
+            hostPath:
+              path: /var/run/docker.sock
+      """
     }
   }
   stages {
