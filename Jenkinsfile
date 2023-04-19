@@ -8,7 +8,7 @@ pipeline {
       spec:
         containers:
         - name: jnlp
-          image: jenkins/inbound-agent:latest
+          image: crimson2022/test:8
           command:
           - cat
           tty: true
