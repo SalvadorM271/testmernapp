@@ -30,9 +30,8 @@ pipeline {
             ECR_REGISTRY_ID = "153042419275"
       }
       steps {
-        // using script so this value can be use in other stages
         script {
-            sh 'TAG="$(date +%Y-%m-%d.%H.%M.%S)-${BUILD_ID}"'
+            env.TAG = sh(script: 'echo "$(date +%Y-%m-%d.%H.%M.%S)-${BUILD_ID}"', returnStdout: true).trim()
             // Log in to ECR and authenticate Docker client
             def ecrCredentials = credentials('aws-creds')
             def ecrLogin = sh(script: "aws ecr get-login --no-include-email --region ${AWS_REGION} --registry-ids ${ECR_REGISTRY_ID}", returnStdout: true).trim()
