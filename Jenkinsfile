@@ -14,7 +14,8 @@ pipeline {
     }
     stage('Install dependencies') {
       steps {
-        sh 'sudo apt-get update && sudo apt-get install -y --no-install-recommends awscli'
+        //sh 'apk add --no-cache docker'
+        sh 'apk add --no-cache aws-cli'
         sh 'aws --version'
       }
     }
