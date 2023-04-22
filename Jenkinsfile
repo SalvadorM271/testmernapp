@@ -1,25 +1,8 @@
 pipeline {
   agent {
-    kubernetes {
-      label 'mypod'
-      yaml """
-      apiVersion: v1
-      kind: Pod
-      spec:
-        containers:
-        - name: jnlp
-          image: crimson2022/test:8
-          command:
-          - cat
-          tty: true
-          volumeMounts:
-            - name: docker-socket
-              mountPath: /var/run/docker.sock
-        volumes:
-          - name: docker-socket
-            hostPath:
-              path: /var/run/docker.sock
-      """
+    docker {
+      image 'alpine:3.17.3'
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
   stages {
