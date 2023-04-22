@@ -28,10 +28,11 @@ pipeline {
         script {
             env.TAG = sh(script: 'echo "$(date +%Y-%m-%d.%H.%M.%S)-${BUILD_ID}"', returnStdout: true).trim()
             // Log in to ECR and authenticate Docker client
-            def ecrCredentials = credentials('aws')
-            def ecrLogin = sh(script: "aws ecr get-login --no-include-email --region ${AWS_REGION} --registry-ids ${ECR_REGISTRY_ID}", returnStdout: true).trim()
-            //  prevent the Docker login command and authentication token from being displayed in the Jenkins log output
-            sh "${ecrLogin} > /dev/null"
+            withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+              def ecrLogin = sh(script: "aws ecr get-login --no-include-email --region ${AWS_REGION} --registry-ids ${ECR_REGISTRY_ID}", returnStdout: true).trim()
+              //  prevent the Docker login command and authentication token from being displayed in the Jenkins log output
+              sh "${ecrLogin} > /dev/null"
+            }
         }
       }
     }
