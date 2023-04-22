@@ -36,11 +36,6 @@ pipeline {
         }
       }
     }
-    stage('Check Docker status') {
-      steps {
-        sh 'sudo systemctl status docker || sudo service docker status'
-      }
-    }
     stage('Build and push') {
       environment {
             FRONTEND = "153042419275.dkr.ecr.us-east-1.amazonaws.com/eks_mern_frontend"
