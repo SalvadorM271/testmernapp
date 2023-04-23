@@ -22,7 +22,7 @@ export default class CreateExercise extends Component {
     }
   }
 
-  //load balancer dns or custom domain
+  //load balancer dns or custom domain.
 
   componentDidMount() {
     axios.get(`http://prod.salvadormenendez.social/users/`)
