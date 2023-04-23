@@ -17,6 +17,7 @@ pipeline {
         sh 'apk add --no-cache docker-cli' // not docker but the cli (im using the host pc docker)
         sh 'apk add --no-cache aws-cli'
         sh 'aws --version'
+        sh 'apk add --no-cache curl'
       }
     }
     stage('pre-run set up') {
