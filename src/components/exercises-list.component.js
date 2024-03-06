@@ -24,7 +24,7 @@ export default class ExercisesList extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://prod.salvadormenendez.social/exercises/`)
+    axios.get(`https://dev.mycloudprojects.uk/exercises/`)
       .then(response => {
         this.setState({ exercises: response.data })
       })
@@ -34,7 +34,7 @@ export default class ExercisesList extends Component {
   }
 
   deleteExercise(id) {
-    axios.delete(`http://prod.salvadormenendez.social/exercises/`+id)
+    axios.delete(`https://dev.mycloudprojects.uk/exercises/`+id)
       .then(response => { console.log(response.data)});
 
     this.setState({

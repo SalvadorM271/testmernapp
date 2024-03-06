@@ -22,10 +22,10 @@ export default class CreateExercise extends Component {
     }
   }
 
-  //load balancer dns or custom domain
+  //load balancer dns or custom domain.
 
   componentDidMount() {
-    axios.get(`http://prod.salvadormenendez.social/users/`)
+    axios.get(`https://dev.mycloudprojects.uk/users/`)
       .then(response => {
         console.log(JSON.stringify(process.env, null, 2)) // remove
         if (response.data.length > 0) {
@@ -77,7 +77,7 @@ export default class CreateExercise extends Component {
 
     console.log(exercise);
 
-    axios.post(`http://prod.salvadormenendez.social/exercises/add`, exercise)
+    axios.post(`https://dev.mycloudprojects.uk/exercises/add`, exercise)
       .then(res => console.log(res.data));
 
     window.location = '/';
